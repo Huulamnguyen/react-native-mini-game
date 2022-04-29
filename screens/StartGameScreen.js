@@ -52,7 +52,7 @@ function StartGameScreen({onPickNumber}){
                     value={enteredNumber}
                     />
                 <View style={styles.buttonsContainer}>
-                    <View style={styles.buttonContainer} >
+                    <View style={styles.buttonContainer}>
                         <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
                     </View>
                     <View style={styles.buttonContainer} >
