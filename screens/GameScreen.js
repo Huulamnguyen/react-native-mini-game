@@ -7,6 +7,7 @@ import Card from '../components/ui/Card';
 import Title from '../components/ui/Title';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import InstructionText from '../components/ui/InstructionText';
+import GuessLongItem from '../components/game/GuessLogItem';
 
 // Generate Random number between two numbers range.
 function generateRandomBetween(min, max, exclude){
@@ -30,7 +31,7 @@ function GameScreen({userNumber, onGameOver}){
 
     useEffect(()=> {
         if (currentGuess === userNumber){
-            onGameOver();
+            onGameOver(guessRounds.length);
         };
     }, [currentGuess, userNumber, onGameOver]);
 
@@ -60,6 +61,8 @@ function GameScreen({userNumber, onGameOver}){
         setGuessRounds(guessRounds => [newRanDomNum, ...guessRounds])
     }
 
+    const guessRoundsListLength = guessRounds.length;
+
     return (
         <View style={styles.screen}>
             <Title>Opponent's Guess</Title>
@@ -80,11 +83,14 @@ function GameScreen({userNumber, onGameOver}){
                 </View>
             </Card>
 
-            <FlatList 
-                data={guessRounds}
-                renderItem={(itemData) => <Text>{itemData.item}</Text>}
-                keyExtractor={(item) => item}
-            />
+            <View style={styles.listContainer}>
+                <FlatList 
+                    data={guessRounds}
+                    renderItem={(itemData) => <GuessLongItem roundNumber={guessRoundsListLength - itemData.index} guess={itemData.item} />}
+                    keyExtractor={(item) => item}
+                />
+            </View>
+            
         </View>
     )
 }
@@ -93,7 +99,7 @@ export default GameScreen;
 
 const styles = StyleSheet.create({
     screen: {
-        padding: 24,
+        padding: 8,
         flex: 1,
     },
     instructionText: {
@@ -104,5 +110,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
+    },
+    listContainer: {
+        flex: 1,
+        padding: 24,
     }
 })

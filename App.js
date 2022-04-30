@@ -33,8 +33,9 @@ export default function App() {
   };
 
   // GameOverHandler when the game is over based on condition
-  function GameOverHandler(){
+  function GameOverHandler(numberOfRounds){
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   };
 
   // Start new game
