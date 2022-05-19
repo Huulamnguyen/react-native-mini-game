@@ -18,5 +18,7 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderWidth: 2,
         borderRadius: 12,
+        maxWidth: '80%',
+        width: 300,
     }
 })
